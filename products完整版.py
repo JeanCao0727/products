@@ -1,32 +1,37 @@
-#products完整版
+#products完整版,更新现有csv文档
+import os #operating system
 
-#1.get info from file and add into list
-products = []
-with open('products.csv','r',encoding='utf-8'):
-	for line in f:
-		if 'products,price' in line:
-			continue
-		name,price = line.strip().split(',')
-		#👆填车厢
-		products.append([name,price])
-		#👆装火车
-print(products)
+products = [] #放最上头
+#1. check if file is there, get info from file and add into list
+if os.path.isfile('products.csv'):
+ 	print('档案在这呢')
+ 	with open('products.csv', 'r', encoding='utf-8') as f:
+ 		for line in f:
+ 			if 'products,price' in line:
+ 				continue
+ 			name, price = line.strip().split(',')
+ 			#👆填车厢
+ 			products.append([name,price])
+ 			#👆装火车
+ 		print(products)
+else:
+ 	print('找不到档案')
 
-#2.input(products,price)
+#2. input(products,price)
 while True:
 	name = input('name?')
 	if name == 'q':
 		break
-	price = inout('price?')
+	price = input('price?')
 	price = int(price)
 	products.append([name,price])
-print（products）
+print(products)
 
-#购买记录
+#3. 购买记录
 for p in products:
 	print(p[0],'的价格是', p[1])
 
-#f.write:栏位名称+input
+#4. f.write:栏位名称+input
 with open('products.csv', 'w', encoding='utf-8') as f:
 	f.write('products,price\n')
 	for p in products:
